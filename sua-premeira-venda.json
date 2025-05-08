@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VendeFácil Digital</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f2f2f2;
+    }
+
+    header {
+      background: #1e88e5;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 15px;
+      padding: 20px;
+      max-width: 300px;
+      flex: 1 1 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .product-card h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .product-card p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .price {
+      font-size: 18px;
+      margin: 10px 0;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .btn {
+      background: #00c851;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #007e33;
+    }
+
+    .grafico {
+      max-width: 100%;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .grafico img {
+      width: 90%;
+      max-width: 700px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.15);
+    }
+
+    .pix-box {
+      margin: 40px auto;
+      text-align: center;
+    }
+
+    .pix-box input {
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .pix-box button {
+      background: #ff6f00;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .pix-box button:hover {
+      background: #e65100;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      font-size: 14px;
+      background: #eeeeee;
+      color: #555;
+    }
+
+    .approved-message {
+      margin-top: 30px;
+      font-size: 18px;
+      text-align: center;
+      color: #4caf50;
+    }
+
+    .approved-message img {
+      width: 50px;
+      vertical-align: middle;
+    }
+
+    .disclaimer {
+      font-size: 14px;
+      text-align: center;
+      color: #f44336;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🚀 VendeFácil Digital</h1>
+  <p>Produtos para quem quer começar a ganhar dinheiro online!</p>
+</header>
+
+<div class="grafico">
+  <h2>📊 Resultados de Vendas</h2>
+  <img src="https://i.imgur.com/7b3DgWb.png" alt="Gráfico de vendas realistas">
+</div>
+
+<div class="container" id="produtos-container">
+  <!-- Os produtos serão carregados aqui via JavaScript -->
+</div>
+
+<div class="pix-box">
+  <h2>💸 Pagamento via Pix</h2>
+  <p>Copie a chave Pix abaixo para realizar o pagamento:</p>
+  <input type="text" id="pixKey" value="06562254167" readonly>
+  <button onclick="copiarPix()">Copiar Pix</button>
+</div>
+
+<div class="approved-message">
+  <h2>Pagamento Aprovado! 🎉</h2>
+  <img src="https://i.imgur.com/vqIuKj7.gif" alt="Gatinho dando joia">
+  <p>Seu pagamento foi recebido com sucesso! Agora, você pode acessar o produto adquirido.</p>
+</div>
+
+<div class="disclaimer">
+  <p><strong>Aviso:</strong> Este site é 100% seguro. O pagamento é feito via Pix, e a chave é registrada em meu CPF: <strong>065.622.541-67</strong>. Não é golpe! 😉</p>
+</div>
+
+<script>
+  // Função para carregar os produtos do arquivo JSON
+  fetch('sua-primeira-venda.json') // Caminho para o seu arquivo JSON
+    .then(response => response.json())
+    .then(data => {
+      let container = document.getElementById('produtos-container');
+      data.forEach(produto => {
+        let productCard = document.createElement('div');
+        productCard.classList.add('product-card');
+        productCard.innerHTML = `
+          <h2>${produto.nome}</h2>
+          <p>${produto.descricao}</p>
+          <div class="price">R$${produto.preco}</div>
+          <a href="${produto.link}" class="btn" target="_blank">Comprar Agora</a>
+        `;
+        container.appendChild(productCard);
